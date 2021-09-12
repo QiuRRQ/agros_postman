@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "8acbd869-daa3-459b-8c72-c86ca57d5ae2",
+		"name": "AGROS WALLET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login driver, sales, manager operasional",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (responseCode.code == 200)\r",
+									"    var resBody = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set('user_id', resBody.data.id);\r",
+									"    pm.collectionVariables.set('user_role', resBody.data.role);\r",
+									"    pm.collectionVariables.set('name', resBody.data.name);\r",
+									"    pm.collectionVariables.set('email', resBody.data.email);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "agung.pambudi5595@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "bismillah",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "login driver, sales, manager operasional",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "test.driver@agros.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/api/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.20.1"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.28"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jul 2021 04:44:14 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": 90,\n        \"api_token\": \"$2y$10$fKC6n8dkpcT2hyhp9ewO1.SsDF5I1F2TpPESyaKgipa7gRXaul/KW\",\n        \"nik\": \"0001\",\n        \"name\": \"Test\",\n        \"email\": \"test.driver@agros.com\",\n        \"photo\": \"drivers/driver-photo-1610907120.jpeg\",\n        \"telepon\": \"081234567890\",\n        \"address\": \"Jl veteran\",\n        \"role\": \"Driver\",\n        \"nomor_polisi\": \"W 1111 UA\",\n        \"truck\": \"Test\",\n        \"balance\": 0,\n        \"bank_name\": \"PT. BANK CENTRAL ASIA TBK.\",\n        \"account_number\": \"0011223344\"\n    },\n    \"message\": \"Data loaded successfully.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "riwayat pekerjaan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"description": "Token didapat ketika login",
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{driver_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/delivery?type=history&limit=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"delivery"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "history"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
